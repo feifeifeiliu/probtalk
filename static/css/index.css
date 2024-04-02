@@ -121,6 +121,15 @@ body {
   font-size: 0;
 }
 
+.results-carousel .item img {
+  max-height: 400px;
+    display: block; /* 将img从默认的inline元素变为block元素 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
 .results-carousel video {
   margin: 0;
 }
