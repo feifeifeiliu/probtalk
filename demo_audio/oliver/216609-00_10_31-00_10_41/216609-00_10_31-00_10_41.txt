@@ -1,0 +1,25 @@
+Transcript: Oops. Hey, it's a sign of respect that respecting their heritage. Why can't you understand that?
+  0.000 |   0.500 | Oops. | 91% 
+  0.500 |   0.900 | Hey, | 97% 
+  0.900 |   1.500 | it's | 97% 
+  1.500 |   1.900 | a | 97% 
+  1.900 |   2.000 | sign | 97% 
+  2.000 |   2.200 | of | 97% 
+  2.200 |   2.400 | respect | 97% 
+  2.400 |   3.100 | that | 86% 
+  3.100 |   3.400 | respecting | 97% 
+  3.400 |   3.800 | their | 97% 
+  3.800 |   4.300 | heritage. | 97% 
+  4.300 |   4.600 | Why | 97% 
+  4.600 |   5.000 | can't | 95% 
+  5.000 |   5.000 | you | 97% 
+  5.000 |   5.300 | understand | 94% 
+  5.300 |   6.000 | that? | 97% 
+Transcript:  And the fence is damage didn't stop.
+  7.500 |   7.700 | And | 97% 
+  7.700 |   7.900 | the | 97% 
+  7.900 |   8.300 | fence | 97% 
+  8.300 |   8.500 | is | 73% 
+  8.500 |   8.800 | damage | 94% 
+  8.800 |   9.300 | didn't | 97% 
+  9.300 |   9.600 | stop. | 97% 

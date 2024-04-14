@@ -1,0 +1,29 @@
+Transcript: Come in from the ocean.
+  0.000 |   0.300 | Come | 97% 
+  0.300 |   0.500 | in | 97% 
+  0.500 |   0.700 | from | 97% 
+  0.700 |   0.800 | the | 97% 
+  0.800 |   1.300 | ocean. | 97% 
+Transcript:  What are the properties well, there's a speed that the wave moves if you see a surfer and he catches a wave.
+  2.100 |   2.300 | What | 97% 
+  2.300 |   2.500 | are | 97% 
+  2.500 |   2.500 | the | 97% 
+  2.500 |   2.900 | properties | 97% 
+  2.900 |   3.700 | well, | 97% 
+  3.700 |   4.200 | there's | 97% 
+  4.200 |   4.800 | a | 97% 
+  4.800 |   5.200 | speed | 97% 
+  5.200 |   5.300 | that | 97% 
+  5.300 |   5.500 | the | 97% 
+  5.500 |   5.800 | wave | 97% 
+  5.800 |   6.300 | moves | 97% 
+  6.300 |   7.000 | if | 97% 
+  7.000 |   7.100 | you | 97% 
+  7.100 |   7.300 | see | 97% 
+  7.300 |   7.700 | a | 97% 
+  7.700 |   8.000 | surfer | 97% 
+  8.000 |   8.300 | and | 97% 
+  8.300 |   8.700 | he | 97% 
+  8.700 |   8.800 | catches | 97% 
+  8.800 |   9.100 | a | 94% 
+  9.100 |   9.400 | wave. | 94% 

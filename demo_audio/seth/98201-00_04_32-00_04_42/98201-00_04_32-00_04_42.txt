@@ -1,0 +1,15 @@
+Transcript: X
+  0.000 |   0.300 | X | 54% 
+Transcript:  offense service
+  1.400 |   2.800 | offense | 90% 
+  2.800 |   3.200 | service | 49% 
+Transcript:  now the meaning is of special interest to Mueller.
+  7.600 |   7.900 | now | 97% 
+  7.900 |   8.100 | the | 97% 
+  8.100 |   8.300 | meaning | 97% 
+  8.300 |   8.400 | is | 97% 
+  8.400 |   8.700 | of | 97% 
+  8.700 |   9.000 | special | 97% 
+  9.000 |   9.200 | interest | 97% 
+  9.200 |   9.500 | to | 85% 
+  9.500 |   9.900 | Mueller. | 89% 

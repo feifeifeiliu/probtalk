@@ -1,48 +1,95 @@
-# Academic Project Page Template
-This is an academic paper project page template.
+# ProbTalk: Towards Variable and Coordinated Holistic Co-Speech Motion Generation [CVPR2024]
+
+The official PyTorch implementation of the **CVPR2024** paper [**"Towards Variable and Coordinated Holistic Co-Speech Motion Generation"**](https://arxiv.org/abs/2404.00368).
+
+Please visit our [**webpage**](https://feifeifeiliu.github.io/ProbTalk/) for more details.
+
+[//]: # (![teaser]&#40;visualise/teaser_01.png&#41;)
 
 
-Example project pages built using this template are:
-- https://vision.huji.ac.il/spectral_detuning/
-- https://vision.huji.ac.il/podd/
-- https://dreamix-video-editing.github.io
-- https://vision.huji.ac.il/conffusion/
-- https://vision.huji.ac.il/3d_ads/
-- https://vision.huji.ac.il/ssrl_ad/
-- https://vision.huji.ac.il/deepsim/
+## TODO
+
+- [ ] Training code.
+- [ ] Testing code.
 
 
+## Getting started
 
-## Start using the template
-To start using the template click on `Use this Template`.
+The training code was tested on `Ubuntu 18.04.5 LTS` and the visualization code was test on `Windows 11`, and it requires:
 
-The template uses html for controlling the content and css for controlling the style. 
-To edit the websites contents edit the `index.html` file. It contains different HTML "building blocks", use whichever ones you need and comment out the rest.  
+* Python 3.8
+* conda3 or miniconda3
+* CUDA capable GPU (12GB+ GPU memory)
 
-**IMPORTANT!** Make sure to replace the `favicon.ico` under `static/images/` with one of your own, otherwise your favicon is going to be a dreambooth image of me.
 
-## Components
-- Teaser video
-- Images Carousel
-- Youtube embedding
-- Video Carousel
-- PDF Poster
-- Bibtex citation
+### 1. Setup environment
 
-## Tips:
-- The `index.html` file contains comments instructing you what to replace, you should follow these comments.
-- The `meta` tags in the `index.html` file are used to provide metadata about your paper 
-(e.g. helping search engine index the website, showing a preview image when sharing the website, etc.)
-- The resolution of images and videos can usually be around 1920-2048, there rarely a need for better resolution that take longer to load. 
-- All the images and videos you use should be compressed to allow for fast loading of the website (and thus better indexing by search engines). For images, you can use [TinyPNG](https://tinypng.com), for videos you can need to find the tradeoff between size and quality.
-- When using large video files (larger than 10MB), it's better to use youtube for hosting the video as serving the video from the website can take time.
-- Using a tracker can help you analyze the traffic and see where users came from. [statcounter](https://statcounter.com) is a free, easy to use tracker that takes under 5 minutes to set up. 
-- This project page can also be made into a github pages website.
-- Replace the favicon to one of your choosing (the default one is of the Hebrew University). 
-- Suggestions, improvements and comments are welcome, simply open an issue or contact me. You can find my contact information at [https://pages.cs.huji.ac.il/eliahu-horwitz/](https://pages.cs.huji.ac.il/eliahu-horwitz/)
+Clone the repo:
+  ```bash
+  git clone https://github.com/feifeifeiliu/ProbTalk.git
+  cd ProbTalk
+  ```  
+Create conda environment:
+```bash
+conda create --name probtalk python=3.8
+conda activate probtalk
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 -c pytorch
+pip install -r requirements.txt
+```
+    
+Please install [**MPI-Mesh**](https://github.com/MPI-IS/mesh).
 
-## Acknowledgments
-Parts of this project page were adopted from the [Nerfies](https://nerfies.github.io/) page.
+### 2. Get data (to do)
 
-## Website License
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+### 3. Download the pretrained models
+
+Download [**pretrained models**](https://drive.google.com/drive/folders/1hm_6s8HuToQz4Fa8PO3WrcJ7DZV7hWwq?usp=sharing),
+unzip and place it in the ProbTalk folder, i.e. ``path-to-ProbTalk/experiments``.
+
+### 4. Training (to do)
+
+### 5. Testing (to do)
+
+### 5. Visualization
+
+If you ssh into the linux machine, NotImplementedError might occur. In this case, please refer to [**issue**](https://github.com/MPI-IS/mesh/issues/66) for solving the error.
+
+Download [**smplx model**](https://drive.google.com/file/d/1Ly_hQNLQcZ89KG0Nj4jYZwccQiimSUVn/view?usp=share_link) (Please register in the official [**SMPLX webpage**](https://smpl-x.is.tue.mpg.de) before you use it.) and place it in ``path-to-ProbTalk/visualise/smplx_model``.
+To visualise the demo videos, run:
+    
+    bash demo.sh
+
+The videos and generated motion data are saved in ``./visualise/video/demo``.
+
+If you ssh into the linux machine, there might be an error about OffscreenRenderer. In this case, please refer to [**issue**](https://github.com/MPI-IS/mesh/issues/66) for solving the error.
+
+## Citation
+If you find our work useful to your research, please consider citing:
+```
+@article{liu2024towards,
+    title={Towards Variable and Coordinated Holistic Co-Speech Motion Generation},
+    author={Liu, Yifei and Cao, Qiong and Wen, Yandong and Jiang, Huaiguang and Ding, Changxing},
+    journal={arXiv preprint arXiv:2404.00368},
+    year={2024}
+}
+
+@inproceedings{yi2023generating,
+    title={Generating Holistic 3D Human Motion from Speech},
+    author={Yi, Hongwei and Liang, Hualin and Liu, Yifei and Cao, Qiong and Wen, Yandong and Bolkart, Timo and Tao, Dacheng and Black, Michael J},
+    booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+    pages={469-480},
+    month={June}, 
+    year={2023} 
+}
+```
+
+## Acknowledgements
+For functions or scripts that are based on external sources, we acknowledge the origin individually in each file.  
+Here are some great resources we benefit:  
+- [Freeform](https://github.com/TheTempAccount/Co-Speech-Motion-Generation), [TalkShow](https://github.com/yhw-yhw/TalkSHOW) for training pipeline
+- [MPI-Mesh](https://github.com/MPI-IS/mesh), [Pyrender](https://github.com/mmatl/pyrender), [Smplx](https://github.com/vchoutas/smplx), [VOCA](https://github.com/TimoBolkart/voca) for rendering  
+- [Wav2Vec2](https://huggingface.co/facebook/wav2vec2-base-960h) and [Faceformer](https://github.com/EvelynFan/FaceFormer) for audio encoder
+
+## Contact
+For questions, please contact ft_lyf@mail.scut.edu.cn
+

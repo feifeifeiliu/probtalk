@@ -1,0 +1,19 @@
+Transcript: That works out to a million dollars for each superhero in the movie.
+  0.400 |   0.700 | That | 97% 
+  0.700 |   1.000 | works | 97% 
+  1.000 |   1.100 | out | 97% 
+  1.100 |   1.300 | to | 97% 
+  1.300 |   1.600 | a | 97% 
+  1.600 |   1.700 | million | 97% 
+  1.700 |   2.100 | dollars | 97% 
+  2.100 |   2.300 | for | 97% 
+  2.300 |   2.600 | each | 97% 
+  2.600 |   3.400 | superhero | 96% 
+  3.400 |   3.600 | in | 97% 
+  3.600 |   3.700 | the | 97% 
+  3.700 |   4.000 | movie. | 97% 
+Transcript:  superheroes in the movie
+  7.500 |   8.200 | superheroes | 96% 
+  8.200 |   8.400 | in | 96% 
+  8.400 |   8.700 | the | 97% 
+  8.700 |   8.700 | movie | 94% 

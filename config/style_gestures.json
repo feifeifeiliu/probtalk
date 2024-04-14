@@ -1,0 +1,103 @@
+{
+  "config_root_path": "/is/cluster/scratch/hyi/ExpressiveBody/SMPLifyX4/scripts",
+  "dataset_load_mode": "pickle",
+  "store_file_path": "store.pkl",
+  "smplx_npz_path": "visualise/smplx_model/SMPLX_NEUTRAL_2020.npz",
+  "extra_joint_path": "visualise/smplx_model/smplx_extra_joints.yaml",
+  "j14_regressor_path": "visualise/smplx_model/SMPLX_to_J14.pkl",
+  "Glow": {
+    "hidden_channels": 512,
+    "K": 16,
+    "actnorm_scale": 1.0,
+    "flow_permutation": "invconv",
+    "flow_coupling": "affine",
+    "network_model": "LSTM",
+    "num_layers": 2,
+    "LU_decomposed": true,
+    "distribution": "normal"
+  },
+  "Model": {
+    "encoder_choice": "mfcc",
+    "model_name": "StyleGestures"
+  },
+  "Data": {
+    "data_root": "../expressive_body-V0.7-ts/",
+    "pklname": "_3d_mfcc.pkl",
+    "whole_video": false,
+    "text": false,
+    "framerate": 30,
+    "seqlen": 30,
+    "n_lookahead": 0,
+    "dropout": 0.4,
+    "pose":{
+      "normalization": false,
+      "convert_to_6d": false,
+      "norm_method": "",
+      "augmentation": false,
+      "generate_length": 60,
+      "pre_pose_length": 0,
+      "pose_dim": 0,
+      "expression": true
+    },
+    "aud":{
+      "aud_feat_dim": 64,
+      "aud_feat_win_size": null,
+      "context_info": false,
+      "feat_method": null
+    }
+  },
+  "Optim": {
+    "name": "adam",
+    "args": {
+      "lr": 0.0015,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08
+    },
+    "Schedule": {
+      "name": "noam_learning_rate_decay",
+      "args": {
+        "warmup_steps": 3000,
+        "minimum": 0.00015
+      }
+    }
+  },
+  "Device": {
+    "glow": [
+      "cuda:0"
+    ],
+    "data": "cuda:0"
+  },
+  "Train": {
+    "epochs": 100,
+    "batch_size": 80,
+    "num_batches": 80000,
+    "max_grad_clip": 5,
+    "max_grad_norm": 100,
+    "max_checkpoints": 4,
+    "checkpoints_gap": 40000,
+    "num_plot_samples": 1,
+    "scalar_log_gap": 50,
+    "validation_log_gap": 500,
+    "plot_gap": 40000,
+    "warm_start": "",
+    "learning_rate": {
+      "generator_learning_rate": 1e-4,
+      "discriminator_learning_rate": 1e-4
+    }
+  },
+  "Infer": {
+    "pre_trained": ""
+  },
+  "DataLoader":{
+    "batch_size": 16,
+    "num_workers": 0
+  },
+  "Log": {
+    "save_every": 10,
+    "print_every": 200,
+    "name": "s2g"
+  }
+}

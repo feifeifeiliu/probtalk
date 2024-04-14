@@ -1,0 +1,85 @@
+{
+  "config_root_path": "/is/cluster/scratch/hyi/ExpressiveBody/SMPLifyX4/scripts",
+  "dataset_load_mode": "json",
+  "store_file_path": "store.pkl",
+  "smplx_npz_path": "visualise/smplx_model/SMPLX_NEUTRAL_2020.npz",
+  "extra_joint_path": "visualise/smplx_model/smplx_extra_joints.yaml",
+  "j14_regressor_path": "visualise/smplx_model/SMPLX_to_J14.pkl",
+  "param": {
+    "w_j": 1,
+    "w_b": 1,
+    "w_h": 1
+  },
+  "Data": {
+    "data_root": "../expressive_body-V0.7-ts/",
+    "pklname": "_6d_wv2.pkl",
+    "whole_video": false,
+    "audio": "wav2vec",
+    "text": null,
+    "pose": {
+      "normalization": true,
+      "convert_to_6d": true,
+      "norm_method": "all",
+      "augmentation": false,
+      "generate_length": 180,
+      "pre_pose_length": 0,
+      "pose_dim": 99,
+      "expression": true
+    },
+    "aud": {
+      "feat_method": "mfcc",
+      "aud_feat_dim": 64,
+      "aud_feat_win_size": null,
+      "context_info": false
+    }
+  },
+  "Model": {
+    "model_type": "body",
+    "model_name": "s2g_body_refiner",
+    "p_audio": "wav2vec",
+    "p_text": null,
+    "r_audio": "wav2vec",
+    "r_text": null,
+    "two_stage": true,
+    "hf_type": "fbhe",
+    "hf_vq_type": "fbhe",
+    "motion_context": true,
+    "transformer": true,
+    "identity": true,
+    "maskgit": true,
+    "maskgit_T": 8,
+    "moformer": false,
+    "composition": true,
+    "code_num": 128,
+    "code_dim": 128,
+    "share_code": false,
+    "vq_type": "fbhe",
+    "q_type": "pro",
+    "bh_model": true,
+    "quant": true,
+    "groups": 4,
+    "knn": false,
+    "AudioOpt": "Adam",
+    "encoder_choice": "wav2vec",
+    "gan": false,
+    "vq_path": "experiments/2023-09-24-smplx_S2G-new_vqt_fbhe1024_size8_newpq128_d128_group4/ckpt-99.pth"
+  },
+  "DataLoader": {
+    "batch_size": 128,
+    "num_workers": 8
+  },
+  "Train": {
+    "epochs": 100,
+    "max_gradient_norm": 5,
+    "learning_rate": {
+      "generator_learning_rate": 1e-4,
+      "discriminator_learning_rate": 1e-4
+    }
+  },
+  "Log": {
+    "save_every": 10,
+    "print_every": 200,
+    "name": "demo"
+  }
+}
+  
