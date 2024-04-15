@@ -2,7 +2,7 @@
 
 The official PyTorch implementation of the **CVPR2024** paper [**"Towards Variable and Coordinated Holistic Co-Speech Motion Generation"**](https://arxiv.org/abs/2404.00368).
 
-Please visit our [**webpage**](https://feifeifeiliu.github.io/ProbTalk/) for more details.
+Please visit our [**webpage**](https://feifeifeiliu.github.io/probtalk/) for more details.
 
 [//]: # (![teaser]&#40;visualise/teaser_01.png&#41;)
 
@@ -84,6 +84,8 @@ If you find our work useful to your research, please consider citing:
 ```
 
 ## Acknowledgements
+We thank Hongwei Yi for the insightful discussions, Hualin Liang for helping us conduct user study.
+
 For functions or scripts that are based on external sources, we acknowledge the origin individually in each file.  
 Here are some great resources we benefit:  
 - [Freeform](https://github.com/TheTempAccount/Co-Speech-Motion-Generation), [TalkShow](https://github.com/yhw-yhw/TalkSHOW) for training pipeline
