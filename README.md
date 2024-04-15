@@ -26,8 +26,8 @@ The training code was tested on `Ubuntu 18.04.5 LTS` and the visualization code 
 
 Clone the repo:
   ```bash
-  git clone https://github.com/feifeifeiliu/ProbTalk.git
-  cd ProbTalk
+  git clone https://github.com/feifeifeiliu/probtalk.git
+  cd probtalk
   ```  
 Create conda environment:
 ```bash
