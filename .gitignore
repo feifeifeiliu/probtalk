@@ -5,3 +5,4 @@ test_3d_mfcc.pkl
 visualise/video
 .idea
 .git
+.gitignore

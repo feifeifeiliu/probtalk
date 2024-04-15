@@ -90,6 +90,5 @@ Here are some great resources we benefit:
 - [MPI-Mesh](https://github.com/MPI-IS/mesh), [Pyrender](https://github.com/mmatl/pyrender), [Smplx](https://github.com/vchoutas/smplx), [VOCA](https://github.com/TimoBolkart/voca) for rendering  
 - [Wav2Vec2](https://huggingface.co/facebook/wav2vec2-base-960h) and [Faceformer](https://github.com/EvelynFan/FaceFormer) for audio encoder
 
-## Contact
-For questions, please contact ft_lyf@mail.scut.edu.cn
-
+## License
+This code and model are available for non-commercial scientific research purposes as defined in the LICENSE (i.e., MIT LICENSE). Note that, using ProbTalk, you have to register SMPL-X and agree with the LICENSE of it, and it's not MIT LICENSE, you can check the LICENSE of SMPL-X from https://github.com/vchoutas/smplx/blob/main/LICENSE; Enjoy your journey of exploring more beautiful avatars in your own application.
