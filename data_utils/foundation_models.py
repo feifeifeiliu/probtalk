@@ -27,13 +27,13 @@ def getFM(audio_name, text_name):
         aud_d = 1024
     elif audio_name in ['wav2vec', 'wav2vec_slice']:
         # try:
-        #     aud_p = AutoProcessor.from_pretrained("facebook/wav2vec2-base-960h", proxies=proxies)
-        #     aud_m = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h", proxies=proxies)
+        aud_p = AutoProcessor.from_pretrained("facebook/wav2vec2-base-960h", proxies=proxies)
+        aud_m = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h", proxies=proxies)
         # except:
         # aud_p = AutoProcessor.from_pretrained("/home/yifei/.cache/huggingface/hub/wav2vec/wav2vec", proxies=proxies)
         # aud_m = Wav2Vec2Model.from_pretrained("/home/yifei/.cache/huggingface/hub/wav2vec/wav2vec", proxies=proxies)
-        aud_p = AutoProcessor.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
-        aud_m = Wav2Vec2Model.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
+        # aud_p = AutoProcessor.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
+        # aud_m = Wav2Vec2Model.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
         aud_d = 768
     elif audio_name == 'speech2text':
         aud_p = AutoProcessor.from_pretrained("facebook/s2t-small-librispeech-asr", proxies=proxies)
