@@ -105,7 +105,7 @@ class SmplxDataset():
             if self.load_all:
                 self._load_npz_all()
 
-        elif load_mode == 'json':
+        elif load_mode == 'json' or load_mode == 'old_json':
             self.annotations = glob(data_root + '/*pkl')
             if len(self.annotations) == 0:
                 raise FileNotFoundError(data_root + ' are empty')

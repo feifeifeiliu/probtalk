@@ -9,8 +9,10 @@ Please visit our [**webpage**](https://feifeifeiliu.github.io/probtalk/) for mor
 
 ## TODO
 
-- [ ] Training code.
-- [ ] Testing code.
+- [x] Update training code.
+- [x] Update testing code.
+- [ ] Update baseline methods.
+- [ ] Update visualization code for linux.
 
 
 ## Getting started
@@ -39,16 +41,51 @@ pip install -r requirements.txt
     
 Please install [**MPI-Mesh**](https://github.com/MPI-IS/mesh).
 
-### 2. Get data (to do)
+### 2. Get data
+
+Download [**SHOW dataset**](https://talkshow.is.tue.mpg.de/download.php) and unzip it.
+The [split files](data_utils/split) provide split information.
 
 ### 3. Download the pretrained models
 
-Download [**pretrained models**](https://drive.google.com/drive/folders/1hm_6s8HuToQz4Fa8PO3WrcJ7DZV7hWwq?usp=sharing),
+Download [**pretrained models**](https://www.dropbox.com/scl/fo/4mdq1em6arysz1cxmkhtf/ACFenfjSPzFcswh_PIvtDz4?rlkey=p2wnbtcd81ko4y3tw5hdxhez1&e=1&st=swh97z2a&dl=0),
 unzip and place it in the ProbTalk folder, i.e. ``path-to-ProbTalk/experiments``.
 
-### 4. Training (to do)
+### 4. Training
 
-### 5. Testing (to do)
+The training procedure of ProbTalk includes 3 steps.
+
+**(a) Train a PQ-VAE**
+
+Modify the value of 'Data.data_root' in [vq.json](config/vq.json). 
+```bash
+bash train_vq.sh
+```
+
+**(b) Train a Predictor**
+
+Modify the value of 'Model.model_name' in [transformer.json](config/transformer.json) to 's2g_body_predictor'. 
+
+Modify the value of 'Model.vq_path' in [transformer.json](config/transformer.json).
+```bash
+bash train_transformer.sh
+```
+
+**(c) Train a Refiner**
+
+Modify the value of 'Model.model_name' in [transformer.json](config/transformer.json) to 's2g_body_refiner'.
+```bash
+bash train_transformer.sh
+```
+
+### 5. Testing
+
+We have identified a difference between the data we used and the SHOW dataset V1.0. We are working on correcting this issue and will update the model, code, and evaluation results soon.
+In the meantime, to reproduce the evaluation results presented in our paper, please download the test data from  [**this page**](https://www.dropbox.com/scl/fo/4mdq1em6arysz1cxmkhtf/ACFenfjSPzFcswh_PIvtDz4?rlkey=p2wnbtcd81ko4y3tw5hdxhez1&e=1&st=swh97z2a&dl=0).
+Then, set 'dataset_load_mode' to 'pickle' in the ['transformer.json'](config/transformer.json) configuration file, and run the following command:
+```bash
+bash test_holistic.sh
+```
 
 ### 5. Visualization
 

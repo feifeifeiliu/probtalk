@@ -6,3 +6,5 @@ visualise/video
 .idea
 .git
 .gitignore
+write_split.py
+download_show.sh

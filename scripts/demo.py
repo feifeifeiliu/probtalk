@@ -69,11 +69,13 @@ def get_betas(speaker):
 def infer(generator, smplx_model, rendertool, config, args):
     # betas = torch.zeros([1, 300], dtype=torch.float64).to('cuda')
     proxies = {
-        # 'http': '127.0.0.1:7890',
-        # 'https': '127.0.0.1:7890',
+        'http': '127.0.0.1:7890',
+        'https': '127.0.0.1:7890',
     }
-    aud_p = AutoProcessor.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
-    aud_m = Wav2Vec2Model.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
+    # aud_p = AutoProcessor.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
+    # aud_m = Wav2Vec2Model.from_pretrained("D:\Downloads\wav2vec", proxies=proxies)
+    aud_p = AutoProcessor.from_pretrained("facebook/wav2vec2-base-960h", cache_dir="D:\cache_hf", proxies=proxies)
+    aud_m = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h", cache_dir="D:\cache_hf", proxies=proxies)
     aud_m = aud_m.to('cuda')
     num_sample = args.num_sample
     cur_wav_file = args.audio_file
@@ -199,6 +201,7 @@ def infer(generator, smplx_model, rendertool, config, args):
         #     pred = torch.cat([pad.repeat(1, 3), pred, pad.repeat(1, exp_dim)], dim=1)
 
         # pred[:, 9:12] = global_orient
+
         pred = part2full(pred, stand)
 
         if face:

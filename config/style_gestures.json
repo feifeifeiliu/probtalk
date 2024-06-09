@@ -1,5 +1,4 @@
 {
-  "config_root_path": "/is/cluster/scratch/hyi/ExpressiveBody/SMPLifyX4/scripts",
   "dataset_load_mode": "pickle",
   "store_file_path": "store.pkl",
   "smplx_npz_path": "visualise/smplx_model/SMPLX_NEUTRAL_2020.npz",
@@ -21,7 +20,7 @@
     "model_name": "StyleGestures"
   },
   "Data": {
-    "data_root": "../expressive_body-V0.7-ts/",
+    "data_root": "../ExpressiveWholeBodyDatasetReleaseV1.0/",
     "pklname": "_3d_mfcc.pkl",
     "whole_video": false,
     "text": false,

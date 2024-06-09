@@ -1,5 +1,4 @@
 {
-  "config_root_path": "/is/cluster/scratch/hyi/ExpressiveBody/SMPLifyX4/scripts",
   "dataset_load_mode": "json",
   "store_file_path": "store.pkl",
   "smplx_npz_path": "visualise/smplx_model/SMPLX_NEUTRAL_2020.npz",

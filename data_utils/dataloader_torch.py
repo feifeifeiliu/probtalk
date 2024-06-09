@@ -88,115 +88,8 @@ class MultiVidData():
                 self.complete_data.append(self.dataset[key].complete_data)
         ######################load with pickle file
                 
-        ######################load with a csv file
-        elif load_mode=='csv':
-
-            # 这里从我的一个code文件夹导入的，后续再完善进来
-            try:
-                sys.path.append(self.config.config_root_path)
-                from config import config_path
-                from csv_parser import csv_parse
-                
-            except ImportError as e:
-                print(f'err: {e}')
-                raise ImportError('config root path error...')
-
-
-            for speaker_name in self.speakers:
-                # df_intervals=pd.read_csv(self.config.voca_csv_file_path)
-                df_intervals=None
-                df_intervals=df_intervals[df_intervals['speaker']==speaker_name]
-                df_intervals = df_intervals[df_intervals['dataset'] == self.split]
-
-                print(f'speaker {speaker_name} train interval length: {len(df_intervals)}')
-                for iter_index, (_, interval) in tqdm(
-                        (enumerate(df_intervals.iterrows())),desc=f'load {speaker_name}'
-                ):
-                    
-                    (
-                        interval_index,
-                        interval_speaker,
-                        interval_video_fn,
-                        interval_id,
-                        
-                        start_time,
-                        end_time,
-                        duration_time,
-                        start_time_10,
-                        over_flow_flag,
-                        short_dur_flag,
-                        
-                        big_video_dir,
-                        small_video_dir_name,
-                        speaker_video_path,
-                        
-                        voca_basename,
-                        json_basename,
-                        wav_basename,
-                        voca_top_clip_path,
-                        voca_json_clip_path,
-                        voca_wav_clip_path,
-                        
-                        audio_output_fn,
-                        image_output_path,
-                        pifpaf_output_path,
-                        mp_output_path,
-                        op_output_path,
-                        deca_output_path,
-                        pixie_output_path,
-                        cam_output_path, 
-                        ours_output_path,
-                        merge_output_path,
-                        multi_output_path,
-                        gt_output_path,
-                        ours_images_path,
-                        pkl_fil_path,
-                    )=csv_parse(interval)
-                    
-                    if not os.path.exists(pkl_fil_path) or not os.path.exists(audio_output_fn):
-                        continue
-
-                    key=f'{interval_video_fn}/{small_video_dir_name}'
-                    self.dataset[key] = dataset(
-                        data_root=pkl_fil_path,
-                        speaker=speaker_name,
-                        audio_fn=audio_output_fn,
-                        audio_sr=audio_sr,
-                        fps=num_frames,
-                        feat_method=feat_method,
-                        audio_feat_dim=aud_feat_dim,
-                        train=(self.split == 'train'),
-                        load_all=True,
-                        split_trans_zero=self.split_trans_zero,
-                        limbscaling=self.limbscaling,
-                        num_frames=self.num_frames,
-                        num_pre_frames=self.num_pre_frames,
-                        num_generate_length=self.num_generate_length,
-                        audio_feat_win_size=aud_feat_win_size,
-                        context_info=context_info,
-                        convert_to_6d=convert_to_6d,
-                        expression=expression,
-                        config=self.config
-                    )
-                    self.complete_data.append(self.dataset[key].complete_data)
-        ######################load with a csv file
-                
         ######################origin load method
-        elif load_mode=='json':
-
-
-
-            # if wav2:
-            #     am_sr = 16000
-            #     from transformers import AutoProcessor
-            #     from nets.spg.wav2vec import Wav2Vec2Model
-            #     am = AutoProcessor.from_pretrained("facebook/wav2vec2-base-960h")
-            #     audio_model = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h").to('cuda')
-            # else:
-            #     am = None
-            #     am_sr = None
-            #     audio_model = None
-
+        elif load_mode=='old_json':
             if 'expressive_body-V2.1' in data_root.split('/')[-1]:
                 id = get_speaker_id(data_root)
                 self.speakers = os.listdir(data_root)
@@ -209,7 +102,7 @@ class MultiVidData():
                 videos=[v for v in os.listdir(speaker_root) ]
                 print(videos)
 
-                haode = huaide = 0
+                good = bad = 0
 
                 for vid in tqdm(videos, desc="Processing training data of {}......".format(speaker_name)):
                     source_vid=vid
@@ -229,10 +122,10 @@ class MultiVidData():
                         audio_fname = os.path.join(speaker_root, source_vid, self.split, s, '%s.wav' % (s))
                         motion_fname = os.path.join(speaker_root, source_vid, self.split, s, '%s.pkl' % (s))
                         if not os.path.isfile(audio_fname) or not os.path.isfile(motion_fname):
-                            huaide = huaide + 1
+                            bad = bad + 1
                             continue
 
-                        # if haode >= 200:
+                        # if good >= 200:
                         #     break
 
                         self.dataset[key]=dataset(
@@ -260,8 +153,69 @@ class MultiVidData():
                             whole_video=config.Data.whole_video,
                         )
                         self.complete_data.append(self.dataset[key].complete_data)
-                        haode = haode + 1
-                print("huaide:{}, haode:{}".format(huaide, haode))
+                        good = good + 1
+                print("bad:{}, good:{}".format(bad, good))
+            import pickle
+
+            f = open(self.split+config.Data.pklname, 'wb')
+            pickle.dump(self.dataset, f)
+            f.close()
+
+        elif load_mode=='json':
+
+            id = speaker_id
+
+            split_info = np.load('data_utils/split/{}_split.npy'.format(split))
+            split_info = split_info.tolist()
+            good = bad = 0
+
+            for item in tqdm(split_info, desc="Processing {} data".format(split)):
+                speaker_name, mid, s = item.split('/')
+                key = os.path.join(mid, s)
+                audio_fname = os.path.join(self.data_root, item, '%s.wav' % (s))
+                motion_fname = os.path.join(self.data_root, item, '%s.pkl' % (s))
+                if not os.path.isfile(audio_fname) or not os.path.isfile(motion_fname):
+                    new_mid = mid.replace('__', '_')
+                    new_item = speaker_name + '/' + new_mid + '/' + s
+                    audio_fname = os.path.join(self.data_root, new_item, '%s.wav' % (s))
+                    motion_fname = os.path.join(self.data_root, new_item, '%s.pkl' % (s))
+                    if not os.path.isfile(audio_fname) or not os.path.isfile(motion_fname):
+                        new_mid = mid.replace('_', ' ')
+                        new_item = speaker_name + '/' + new_mid + '/' + s
+                        audio_fname = os.path.join(self.data_root, new_item, '%s.wav' % (s))
+                        motion_fname = os.path.join(self.data_root, new_item, '%s.pkl' % (s))
+                        if not os.path.isfile(audio_fname) or not os.path.isfile(motion_fname):
+                            bad = bad + 1
+                            print(item)
+                            continue
+
+                self.dataset[key]=dataset(
+                    data_root=os.path.join(self.data_root, item),
+                    speaker=id[speaker_name],
+                    motion_fn=motion_fname,
+                    audio_fn=audio_fname,
+                    audio_sr=audio_sr,
+                    fps=num_frames,
+                    feat_method=feat_method,
+                    audio_feat_dim=aud_feat_dim,
+                    train=(self.split=='train'),
+                    load_all=True,
+                    split_trans_zero=self.split_trans_zero,
+                    limbscaling=self.limbscaling,
+                    num_frames=self.num_frames,
+                    num_pre_frames=self.num_pre_frames,
+                    num_generate_length=self.num_generate_length,
+                    audio_feat_win_size=aud_feat_win_size,
+                    context_info=context_info,
+                    convert_to_6d=convert_to_6d,
+                    expression=expression,
+                    config=self.config,
+                    fm_dict=self.fm_dict,
+                    whole_video=config.Data.whole_video,
+                )
+                self.complete_data.append(self.dataset[key].complete_data)
+                good = good + 1
+            print("bad:{}, good:{}".format(bad, good))
             import pickle
 
             f = open(self.split+config.Data.pklname, 'wb')

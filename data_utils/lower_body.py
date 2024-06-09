@@ -83,6 +83,23 @@ def part2full(input, stand=False):
     return input
 
 
+def sit2stand(input):
+
+    lp = torch.zeros_like(lower_pose)
+    lp[6:9] = torch.tensor([3.0747, -0.0158, -0.0152])
+    lp = lp.unsqueeze(dim=0).repeat(input.shape[0], 1).to(input.device)
+
+    input = torch.cat([input[:, :3],
+                       lp[:, :15],
+                       input[:, 18:21],
+                       lp[:, 15:21],
+                       input[:, 27:30],
+                       lp[:, 21:27],
+                       input[:, 36:]]
+                      , dim=1)
+    return input
+
+
 def poses2pred(input, stand=False):
     if stand:
         lp = lower_pose_stand.unsqueeze(dim=0).repeat(input.shape[0], 1).to(input.device)

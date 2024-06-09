@@ -58,7 +58,8 @@ def init_dataloader(data_root, speakers, args, config):
     )
 
     if config.Data.pose.normalization:
-        norm_stats_fn = os.path.join(os.path.dirname(args.model_path), "norm_stats.npy")
+        # norm_stats_fn = os.path.join(os.path.dirname(args.model_path), "norm_stats.npy")
+        norm_stats_fn = 'data_utils/norm_stats.npy'
         norm_stats = np.load(norm_stats_fn, allow_pickle=True)
         data_base.data_mean = norm_stats[0]
         data_base.data_std = norm_stats[1]
@@ -228,35 +229,35 @@ def test(test_loader, norm_stats, generator, FGD_handler, smplx_model, config):
             mask = mask.reshape(1, 1, -1).repeat(B, 1, 1).to(poses.device)
 
             ### predict poses
-            pred, cost_time = generator(forward_type='infer_on_audio',
-                                        aud=aud, text=text, gt_poses=gt_poses, id=id, B=B, mask=mask,
-                                        target_frame=poses.shape[2], fm_dict=fm_dict,
-                                        aud_fn=bat['aud_file'][0], fps=30, frame=poses.shape[-1])
+            # pred, cost_time = generator(forward_type='infer_on_audio',
+            #                             aud=aud, text=text, gt_poses=gt_poses, id=id, B=B, mask=mask,
+            #                             target_frame=poses.shape[2], fm_dict=fm_dict,
+            #                             aud_fn=bat['aud_file'][0], fps=30, frame=poses.shape[-1])
 
 
 
-            # pred = None
-            # num_slices = 1 + math.ceil((aud.shape[-1] - 180) / 150)
-            # cost_time = 0
-            # input_gt = gt_poses.clone().repeat(B, 1, 1)
-            # input_mask = mask.clone()
-            # for i in range(num_slices):
-            #     slice_start = 0 if i == 0 else 150 + 180 * (i - 1)
-            #     slice_end = 180 if i == 0 else 150 + 180 * i
-            #
-            #     pred_0, time_x = generator(forward_type='infer_on_batch',
-            #                                aud=aud[..., slice_start:slice_end],
-            #                                text=text[..., slice_start:slice_end],
-            #                                gt_poses=input_gt[..., slice_start:slice_end],
-            #                                mask=input_mask[..., slice_start:slice_end],
-            #                                id=id, B=B)
-            #     if pred is None:
-            #         pred = pred_0
-            #     else:
-            #         pred = torch.cat([pred, pred_0[..., 30:]], -1)
-            #     input_gt[..., slice_start:slice_end] = pred_0
-            #     input_mask[..., slice_start:slice_end] = 1
-            #     cost_time = cost_time + time_x
+            pred = None
+            num_slices = 1 + math.ceil((aud.shape[-1] - 180) / 150)
+            cost_time = 0
+            input_gt = gt_poses.clone().repeat(B, 1, 1)
+            input_mask = mask.clone()
+            for i in range(num_slices):
+                slice_start = 0 if i == 0 else 150 + 180 * (i - 1)
+                slice_end = 180 if i == 0 else 150 + 180 * i
+
+                pred_0, time_x = generator(forward_type='infer_on_batch',
+                                           aud=aud[..., slice_start:slice_end],
+                                           text=text[..., slice_start:slice_end],
+                                           gt_poses=input_gt[..., slice_start:slice_end],
+                                           mask=input_mask[..., slice_start:slice_end],
+                                           id=id, B=B)
+                if pred is None:
+                    pred = pred_0
+                else:
+                    pred = torch.cat([pred, pred_0[..., 30:]], -1)
+                input_gt[..., slice_start:slice_end] = pred_0
+                input_mask[..., slice_start:slice_end] = 1
+                cost_time = cost_time + time_x
 
             pred = gt_poses * mask + pred * (1 - mask)
 
@@ -394,12 +395,12 @@ def main():
     config_emb = config
     config_emb.Model.vq_type = 'fe'
     face_ae = init_model('emb_net', args, config_emb, True,
-                         './experiments/2023-10-26-smplx_S2G-embnet-6d-face/ckpt-99.pth')
+                         './experiments/val_models/val_face.pth')
     config_emb.Model.vq_type = 'bh'
     body_ae = init_model('emb_net', args, config_emb, True,
-                         './experiments/2023-10-26-smplx_S2G-embnet-6d-body/ckpt-99.pth')
+                         './experiments/val_models/val_body.pth')
     config_emb.Model.vq_type = 'fbhe'
-    full_ae = init_model('emb_net', args, config_emb, True, './experiments/2023-10-21-smplx_S2G-embnet-6d/ckpt-99.pth')
+    full_ae = init_model('emb_net', args, config_emb, True, './experiments/val_models/val.pth')
     FGD_handler = EmbeddingSpaceEvaluator(face_ae, body_ae, full_ae, None, 'cuda')
     # FGD_handler = None
 
