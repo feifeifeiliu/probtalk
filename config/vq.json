@@ -36,7 +36,7 @@
     "model_type": "body",
     "model_name": "s2g_body_vqt",
     "composition": false,
-    "code_num": 4096,
+    "code_num": 128,
     "code_dim": 128,
     "share_code": false,
     "bh_model": true,
@@ -64,7 +64,7 @@
   "Log": {
     "save_every": 20,
     "print_every": 200,
-    "name": "rq4096_d128_group4-2"
+    "name": "pq_n128_d128_group4"
   }
 }
   
