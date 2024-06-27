@@ -48,7 +48,7 @@ The [split files](data_utils/split) provide split information.
 
 ### 3. Download the pretrained models
 
-Download [**pretrained models**](https://www.dropbox.com/scl/fo/4mdq1em6arysz1cxmkhtf/ACFenfjSPzFcswh_PIvtDz4?rlkey=p2wnbtcd81ko4y3tw5hdxhez1&e=1&st=swh97z2a&dl=0),
+Download [**pretrained models**](https://www.dropbox.com/scl/fo/4mdq1em6arysz1cxmkhtf/ACFenfjSPzFcswh_PIvtDz4?rlkey=updgemk51ldygy0gezzex0s68&st=1ll4o2ct&dl=0),
 unzip and place it in the ProbTalk folder, i.e. ``path-to-ProbTalk/experiments``.
 
 ### 4. Training
